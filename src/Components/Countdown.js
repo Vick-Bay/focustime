@@ -15,13 +15,15 @@ export const Countdown = ({
   const [millis, setMillis] = useState(minutesToMillis(minutes))
   const interval = React.useRef(null);
 
+  const minute = Math.floor(millis / 1000 / 60) % 60;
+  const seconds = Math.floor(millis / 1000) % 60;
+
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
         return time;
       }
       const timeLeft = time - 1000;
-      onProgress(timeLeft / minutesToMillis(minutes))
       return timeLeft;
     })
   }
@@ -31,14 +33,12 @@ export const Countdown = ({
       if (interval.current) clearInterval(interval.current);
       return;
     }
-    interval.current = setInterval(countDown, 1000)
+    interval.current = setInterval(countDown, 1000);
+    onProgress(millis / minutesToMillis(minutes))
 
     return () => clearInterval(interval.current)
-  }, [isPaused])
+  }, [isPaused, millis])
 
-
-  const minute = Math.floor(millis / 1000 / 60) % 60;
-  const seconds = Math.floor(millis / 1000) % 60;
 
   return (
     <Text style={styles.text}>{formatTime(minute)}:{formatTime(seconds)}</Text>
