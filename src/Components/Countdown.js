@@ -32,7 +32,14 @@ export const Countdown = ({
 
   useEffect(() => {
     setMillis(minutesToMillis(minutes))
-  }, [minutes])
+  }, [minutes]);
+
+  useEffect(() => {
+    onProgress(millis / minutesToMillis(minutes));
+    if (millis === 0) {
+      onEnd()
+    };
+  }, [millis]);
 
   useEffect(() => {
     if (isPaused) {
@@ -40,10 +47,8 @@ export const Countdown = ({
       return;
     }
     interval.current = setInterval(countDown, 1000);
-    onProgress(millis / minutesToMillis(minutes))
-    if (millis === 0) { onEnd() };
     return () => clearInterval(interval.current)
-  }, [isPaused, millis, onEnd])
+  }, [isPaused, millis, onEnd]);
 
 
   return (
