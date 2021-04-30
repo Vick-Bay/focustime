@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper'
-import { RoundedButton } from '../../Components/RoundedButton'
-import { fontSizes, spacingSizes } from '../../utils/sizes'
-import { colors } from '../../utils/colors'
+import { TextInput } from 'react-native-paper';
+import { RoundedButton } from '../../Components/RoundedButton';
+import { fontSizes, spacingSizes } from '../../utils/sizes';
+import { colors } from '../../utils/colors';
 
 export const Focus = ({ addSubject }) => {
-  const [subject, setSubject] = useState(null)
+  const [subject, setSubject] = useState(null);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
